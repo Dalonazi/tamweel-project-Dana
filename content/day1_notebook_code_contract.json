@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "source_release": "v1.0.0",
+  "notebook": "notebooks/01_baseline_boosting.ipynb",
+  "purpose": "Ensure the bilingual conversion preserves the released Day 1 executable logic.",
+  "code_cells": [
+    {
+      "id": "96c4cbd2",
+      "sha256": "31b95a0b062dcc4d96a73923543fcadf6f1617ce20aecd705d6c412041bf4157",
+      "lines": 35
+    },
+    {
+      "id": "c9f99e49",
+      "sha256": "4baa89dc432cfff095b1d558d451ebfc1e42943c88289da49dfc68ef6b3003fb",
+      "lines": 22
+    },
+    {
+      "id": "a030cadd",
+      "sha256": "9417ecd5bbef03979f628eff5f296d647de7b18ca2d19d4d8f543582c7847ca6",
+      "lines": 12
+    },
+    {
+      "id": "47ca038a",
+      "sha256": "e242ff59112b5b878e732a4705a3482f36510724982c96b55dc8f78670c92093",
+      "lines": 3
+    },
+    {
+      "id": "c4e180e8",
+      "sha256": "aef67ef7d3f182124cee4da14ebf3f5ee05d191d019d51e10ebbda3a6770146e",
+      "lines": 10
+    },
+    {
+      "id": "24998aaf",
+      "sha256": "0798af4b4fa2d48b07e3b01e50d2425c4f0cbf73899ef615dd3994b0821af1cc",
+      "lines": 15
+    },
+    {
+      "id": "8880a3e4",
+      "sha256": "f971933d40404c2490c44eeeab8aae1f9e7e96fe6989d709aa945491527eed5a",
+      "lines": 11
+    },
+    {
+      "id": "fd38993e",
+      "sha256": "69d14e6f74c86f9743f0b58fdc62cc67b0b9eecfb9db9bd2ee2aa1ecbd88c27b",
+      "lines": 20
+    },
+    {
+      "id": "ddc1d570",
+      "sha256": "23d88ed2fc8cb853cbc41bf54402deefce2ad003c3b787393f0526eb1638efc4",
+      "lines": 8
+    },
+    {
+      "id": "ff6b7f89",
+      "sha256": "a7c2782099102bef3f10f7e09476656d1069e65feee9b4031b828177c9e1c0c9",
+      "lines": 33
+    }
+  ]
+}

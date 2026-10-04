@@ -1,0 +1,53 @@
+name: Notebook 99 Contract and Structure
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'notebooks/99_final_submission_check.ipynb'
+      - 'content/notebook99_code_contract.json'
+      - 'scripts/check_final_check_notebook.py'
+      - 'scripts/check_notebook_code_contract.py'
+      - '.github/workflows/final_check_notebook.yml'
+  pull_request:
+    paths:
+      - 'notebooks/99_final_submission_check.ipynb'
+      - 'content/notebook99_code_contract.json'
+      - 'scripts/check_final_check_notebook.py'
+      - 'scripts/check_notebook_code_contract.py'
+      - '.github/workflows/final_check_notebook.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Verify released executable-cell contract
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/notebook99_code_contract.json
+          --output check-output/notebook99-code-contract.json
+      - name: Validate bilingual structure and safety signals
+        run: >-
+          python scripts/check_final_check_notebook.py
+          --output check-output/notebook99-structure.json
+      - name: Upload Notebook 99 validation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: notebook99-validation
+          path: check-output
+          retention-days: 14

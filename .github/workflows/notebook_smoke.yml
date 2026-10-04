@@ -1,0 +1,120 @@
+name: Notebook Smoke Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'notebooks/0*.ipynb'
+      - 'scripts/**'
+      - 'content/notebook_code_contract.json'
+      - 'content/day1_notebook_code_contract.json'
+      - 'content/day2_notebook_code_contract.json'
+      - 'content/day3_notebook_code_contract.json'
+      - 'content/day4_notebook_code_contract.json'
+      - 'content/day5_notebook_code_contract.json'
+      - 'content/notebook99_code_contract.json'
+      - 'requirements*.txt'
+      - 'constraints.txt'
+      - '.github/workflows/notebook_smoke.yml'
+  pull_request:
+    paths:
+      - 'notebooks/0*.ipynb'
+      - 'scripts/**'
+      - 'content/notebook_code_contract.json'
+      - 'content/day1_notebook_code_contract.json'
+      - 'content/day2_notebook_code_contract.json'
+      - 'content/day3_notebook_code_contract.json'
+      - 'content/day4_notebook_code_contract.json'
+      - 'content/day5_notebook_code_contract.json'
+      - 'content/notebook99_code_contract.json'
+      - 'requirements*.txt'
+      - 'constraints.txt'
+      - '.github/workflows/notebook_smoke.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  notebooks:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONIOENCODING: utf-8
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      ASSESSMENT_MODE: '1'
+      SMOKE_OUTPUT: /tmp/sda-dsc-211-notebook-smoke
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU environment
+        run: python -m pip install -r requirements-colab.txt -r requirements-check.txt -c constraints.txt
+      - name: Prepare external report directory
+        run: |
+          rm -rf "$SMOKE_OUTPUT"
+          mkdir -p "$SMOKE_OUTPUT"
+      - name: Verify Notebook 00 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/notebook_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-00-code-contract.json"
+      - name: Verify Day 1 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day1_notebook_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-01-code-contract.json"
+      - name: Verify Day 2 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day2_notebook_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-02-code-contract.json"
+      - name: Verify Day 3 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day3_notebook_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-03-code-contract.json"
+      - name: Verify Day 4 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day4_notebook_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-04-code-contract.json"
+      - name: Verify Day 5 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day5_notebook_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-05-code-contract.json"
+      - name: Verify Notebook 99 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/notebook99_code_contract.json
+          --output "$SMOKE_OUTPUT/notebook-99-code-contract.json"
+      - name: Validate Notebook 99 structure
+        run: >-
+          python scripts/check_final_check_notebook.py
+          --output "$SMOKE_OUTPUT/notebook99-structure.json"
+      - name: Execute applications in fresh kernels
+        run: python scripts/run_notebooks.py --output "$SMOKE_OUTPUT"
+      - name: Stage reports for artifact upload
+        if: always()
+        run: |
+          rm -rf check-output
+          mkdir -p check-output
+          if [ -d "$SMOKE_OUTPUT" ]; then
+            cp -R "$SMOKE_OUTPUT"/. check-output/
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: notebook-smoke
+          path: check-output
+          retention-days: 14

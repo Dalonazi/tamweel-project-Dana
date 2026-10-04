@@ -1,0 +1,149 @@
+schema_version: 1
+release_target: v1.1.0
+mode: phased
+
+markdown_files:
+  - path: README.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: START_HERE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: READINESS_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: COLAB_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: GITHUB_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: FAQ.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: TROUBLESHOOTING.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: LEARNING_RESOURCES.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: GLOSSARY.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: DAY1_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: DAY2_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: DAY3_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: DAY4_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: DAY5_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: FINAL_CHECK_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: TECHNICAL_REQUIREMENTS.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: ADMINISTRATIVE_REQUIREMENTS.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: RUBRIC.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: SUBMISSION_GUIDE.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: COURSE_ALIGNMENT.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+  - path: docs/BILINGUAL_NOTEBOOK_STANDARD.md
+    status: complete
+    required_markers:
+      - 'English'
+      - 'العربية'
+  - path: docs/GLOSSARY_BILINGUAL_DRAFT.md
+    status: complete
+    required_markers:
+      - '<!-- BILINGUAL:EN -->'
+      - '<!-- BILINGUAL:AR -->'
+
+notebooks:
+  - path: notebooks/00_readiness_check_bilingual_preview.ipynb
+    status: complete
+    minimum_paired_cells: 5
+  - path: notebooks/00_readiness_check.ipynb
+    status: complete
+    minimum_paired_cells: 8
+  - path: notebooks/01_baseline_boosting.ipynb
+    status: complete
+    minimum_paired_cells: 12
+  - path: notebooks/02_validation_tuning.ipynb
+    status: complete
+    minimum_paired_cells: 12
+  - path: notebooks/03_cost_sensitive_decision.ipynb
+    status: complete
+    minimum_paired_cells: 11
+  - path: notebooks/04_explain_calibrate.ipynb
+    status: complete
+    minimum_paired_cells: 12
+  - path: notebooks/05_final_model.ipynb
+    status: complete
+    minimum_paired_cells: 12
+  - path: notebooks/99_final_submission_check.ipynb
+    status: complete
+    minimum_paired_cells: 6
+
+rules:
+  enforce_only_complete_items: true
+  notebook_pair_metadata_key: bilingual_pair_id
+  notebook_order_metadata_key: bilingual_order
+  required_notebook_order: en-left-ar-right
+  required_english_signal: English
+  required_arabic_signal: العربية

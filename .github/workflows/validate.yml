@@ -1,0 +1,36 @@
+name: Environment Check
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONIOENCODING: utf-8
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      ASSESSMENT_MODE: '1'
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU environment
+        run: python -m pip install -r requirements-colab.txt -r requirements-check.txt -c constraints.txt
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Starter template health (not final readiness)
+        run: python scripts/validate_submission.py --template --output .check-output
+      - name: Local Markdown links
+        run: python scripts/check_links.py

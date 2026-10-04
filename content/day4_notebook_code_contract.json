@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "source_release": "v1.0.0",
+  "notebook": "notebooks/04_explain_calibrate.ipynb",
+  "purpose": "Ensure the bilingual conversion preserves the released Day 4 executable logic.",
+  "code_cells": [
+    {
+      "id": "2000b4e0",
+      "sha256": "4ec8b1afa533aad1da56889fa7d09440ea63aed875bf4894444addd6dc96ee4d",
+      "lines": 39
+    },
+    {
+      "id": "c34fd384",
+      "sha256": "5a06a544af1a6f0806f2800bf2cf92810d3a0ecef8bc4f3bf63fc896e87f6bfc",
+      "lines": 40
+    },
+    {
+      "id": "8716aad8",
+      "sha256": "0ad4ceed5f6de47b02bbd33696d9873bc9d4a0dd130cf962c6fb5b38091f5fdc",
+      "lines": 11
+    },
+    {
+      "id": "6e92229c",
+      "sha256": "7b0fac3cff38d5d00c4e6c129ad30ac22c05f7bc0d24082d9bf87670d566f501",
+      "lines": 23
+    },
+    {
+      "id": "df944927",
+      "sha256": "2dd367116eb96516cace24cd7df13a0d7495fd72b34f7cc6dc984ebf68e858c1",
+      "lines": 25
+    },
+    {
+      "id": "e1c394f5",
+      "sha256": "fafa6e37a8f64d8df98d3f8308d7aa269af8643c060cf9bc4164c8388b011b07",
+      "lines": 25
+    },
+    {
+      "id": "24692165",
+      "sha256": "4565cc67d5bcb9053ac1255acc0d60766a9d395302a26928bb9577793ff3adc4",
+      "lines": 22
+    },
+    {
+      "id": "79d6aa70",
+      "sha256": "199af94ccaea665eb1a277426ee0165e2db6ed969fec3332f489f74dde8c33ea",
+      "lines": 21
+    },
+    {
+      "id": "84a1a47c",
+      "sha256": "83790742c1db311fa39a35dd2f4dce9e314d2a8bcc121252964b8993fe87e33e",
+      "lines": 10
+    },
+    {
+      "id": "03fec49c",
+      "sha256": "145adda0b8ddc961f74e57a8bd5c0226872056add8a4b55e14772e8bcfb8a0a5",
+      "lines": 84
+    }
+  ]
+}

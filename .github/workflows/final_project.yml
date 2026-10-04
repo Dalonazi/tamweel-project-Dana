@@ -1,0 +1,42 @@
+name: Final Project Check
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  final:
+    if: ${{ !github.event.repository.private && github.repository != 'almiyead-rgb/sda-dsc-211-student-template' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONIOENCODING: utf-8
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      ASSESSMENT_MODE: '1'
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU environment
+        run: python -m pip install -r requirements-colab.txt -r requirements-check.txt -c constraints.txt
+      - name: Strict final project check
+        run: python scripts/final_check.py --output .check-output
+      - name: Explain scope
+        if: always()
+        shell: bash
+        run: |
+          echo 'Read self_check_report.md in the final-check artifact. This run is technical evidence, not a grade or receipt.' >> "$GITHUB_STEP_SUMMARY"
+          echo "Checked commit: $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: final-check
+          path: .check-output
+          retention-days: 7

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please attribute these learning resources to Meaad Al-Marri."
+title: "SDA-DSC-211: Advanced Machine Learning Methods"
+authors:
+  - family-names: "Al-Marri"
+    given-names: "Meaad"
+url: "https://github.com/almiyead-rgb/advanced-machine-learning-methods-sda-dsc-211"
+type: software
+version: 1.0.0

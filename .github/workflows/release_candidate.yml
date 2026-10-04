@@ -1,0 +1,109 @@
+name: Release Candidate Integrity
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop/bilingual-v1.1.0
+    paths:
+      - 'README.md'
+      - 'START_HERE.md'
+      - 'READINESS_GUIDE.md'
+      - 'COLAB_GUIDE.md'
+      - 'GITHUB_GUIDE.md'
+      - 'FAQ.md'
+      - 'TROUBLESHOOTING.md'
+      - 'LEARNING_RESOURCES.md'
+      - 'GLOSSARY.md'
+      - 'DAY*_GUIDE.md'
+      - 'FINAL_CHECK_GUIDE.md'
+      - 'TECHNICAL_REQUIREMENTS.md'
+      - 'ADMINISTRATIVE_REQUIREMENTS.md'
+      - 'RUBRIC.md'
+      - 'SUBMISSION_GUIDE.md'
+      - 'COURSE_ALIGNMENT.md'
+      - 'RELEASE_NOTES.md'
+      - 'content/**'
+      - 'data/**'
+      - 'notebooks/**'
+      - 'reports/**'
+      - 'presentation/**'
+      - 'tamweel/**'
+      - 'scripts/build_release_manifest.py'
+      - 'scripts/check_release_candidate.py'
+      - 'release/release_scope.json'
+      - '.github/workflows/release_candidate.yml'
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'START_HERE.md'
+      - 'READINESS_GUIDE.md'
+      - 'COLAB_GUIDE.md'
+      - 'GITHUB_GUIDE.md'
+      - 'FAQ.md'
+      - 'TROUBLESHOOTING.md'
+      - 'LEARNING_RESOURCES.md'
+      - 'GLOSSARY.md'
+      - 'DAY*_GUIDE.md'
+      - 'FINAL_CHECK_GUIDE.md'
+      - 'TECHNICAL_REQUIREMENTS.md'
+      - 'ADMINISTRATIVE_REQUIREMENTS.md'
+      - 'RUBRIC.md'
+      - 'SUBMISSION_GUIDE.md'
+      - 'COURSE_ALIGNMENT.md'
+      - 'RELEASE_NOTES.md'
+      - 'content/**'
+      - 'data/**'
+      - 'notebooks/**'
+      - 'reports/**'
+      - 'presentation/**'
+      - 'tamweel/**'
+      - 'scripts/build_release_manifest.py'
+      - 'scripts/check_release_candidate.py'
+      - 'release/release_scope.json'
+      - '.github/workflows/release_candidate.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: ${{ github.event_name == 'push' }}
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Check release-candidate documentation and privacy signals
+        run: python scripts/check_release_candidate.py --output check-output/release-candidate.json
+      - name: Build deterministic candidate integrity manifest
+        run: |
+          mkdir -p release check-output
+          python scripts/build_release_manifest.py --output release/release_manifest.candidate.json
+          cp release/release_manifest.candidate.json check-output/release_manifest.candidate.json
+      - name: Commit candidate manifest on the controlled development branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop/bilingual-v1.1.0'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add release/release_manifest.candidate.json
+          if git diff --cached --quiet; then
+            echo 'Candidate manifest is already current.'
+          else
+            git commit -m 'Refresh learner release candidate manifest'
+            git push
+          fi
+      - name: Upload release-candidate evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-candidate-integrity
+          path: check-output
+          retention-days: 30

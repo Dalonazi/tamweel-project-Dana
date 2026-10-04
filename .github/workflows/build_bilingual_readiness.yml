@@ -1,0 +1,57 @@
+name: Build Bilingual Readiness Notebook
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop/bilingual-v1.1.0
+    paths:
+      - 'scripts/build_bilingual_readiness.py'
+      - 'scripts/check_notebook_code_contract.py'
+      - 'content/notebook_code_contract.json'
+      - '.github/workflows/build_bilingual_readiness.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bilingual-readiness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    if: github.repository == 'almiyead-rgb/sda-dsc-211-student-template'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Generate paired bilingual markdown
+        run: python scripts/build_bilingual_readiness.py
+      - name: Verify executable cells were preserved
+        run: python scripts/check_notebook_code_contract.py --output .check-output/notebook-code-contract.json
+      - name: Commit the generated notebook
+        shell: bash
+        run: |
+          if git diff --quiet -- notebooks/00_readiness_check.ipynb; then
+            echo 'Notebook already matches the bilingual source.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add notebooks/00_readiness_check.ipynb
+          git commit -m 'Generate bilingual readiness notebook'
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Upload preservation report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: readiness-code-preservation
+          path: .check-output/notebook-code-contract.json
+          retention-days: 14

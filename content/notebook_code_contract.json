@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "source_release": "v1.0.0",
+  "notebook": "notebooks/00_readiness_check.ipynb",
+  "purpose": "Ensure the bilingual conversion preserves the released readiness notebook executable logic.",
+  "code_cells": [
+    {
+      "id": "7dd4fc9d",
+      "sha256": "2f9a4be121f1fc6c530e90ccfe3d9fd8e8adec3da39a6a28336082ab84a440a6",
+      "lines": 27
+    },
+    {
+      "id": "a46f1045",
+      "sha256": "c91a45457910c1bfb8d8f8ba3aaf4d9968c98671e2018034973cd3ebedd6afa6",
+      "lines": 13
+    },
+    {
+      "id": "c676fde5",
+      "sha256": "c5a73a7865271124a37c92a9c456f7dec29ee741b82238c686182fb843fc0dd5",
+      "lines": 5
+    },
+    {
+      "id": "3d80d9ab",
+      "sha256": "2e4b2599fe0416be2e1bde584c1e55eab2c178c95c5ccb9183b25b3d04e1cc40",
+      "lines": 18
+    },
+    {
+      "id": "50299ad8",
+      "sha256": "07b84930eda701e213a76707a51569c2c8d2d72946babfb37d4c2bfcf54418db",
+      "lines": 17
+    }
+  ]
+}

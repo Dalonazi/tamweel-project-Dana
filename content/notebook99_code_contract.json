@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "source_release": "v1.0.0",
+  "notebook": "notebooks/99_final_submission_check.ipynb",
+  "purpose": "Ensure the bilingual conversion preserves the released Notebook 99 executable logic.",
+  "code_cells": [
+    {
+      "id": "ea0d9afa",
+      "sha256": "7ea2f44c8006c1b7a4b088f8ceb5ed9727e54c0dd4f8583fe3f963a0144a9d37",
+      "lines": 3
+    },
+    {
+      "id": "24d8a679",
+      "sha256": "bfae9b8860854213b76d5fcc0c4d996b3b6c9d9d74dada43e1e87d4ec34889dd",
+      "lines": 21
+    },
+    {
+      "id": "0c05021e",
+      "sha256": "abd4cb12e33385b94d157b588ceffd88c8d6d39bd32ee7a2d7bd02fb220e31fb",
+      "lines": 23
+    },
+    {
+      "id": "a9a8bf0d",
+      "sha256": "64b8213c69b4b741a13228c78566d9ab359cd23931fdbe0cc05d42f4b631f501",
+      "lines": 15
+    },
+    {
+      "id": "2a1a4a61",
+      "sha256": "3c83a4bb67083f9dd19d998dcc5ac040accb114d97ad793e95833120e94ecd21",
+      "lines": 17
+    }
+  ]
+}

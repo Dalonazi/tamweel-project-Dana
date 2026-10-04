@@ -1,0 +1,87 @@
+name: Bilingual Content Check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'content/**'
+      - 'docs/**'
+      - 'notebooks/**'
+      - '*.md'
+      - 'scripts/check_bilingual_content.py'
+      - 'scripts/check_notebook_code_contract.py'
+      - '.github/workflows/bilingual_content_check.yml'
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'docs/**'
+      - 'notebooks/**'
+      - '*.md'
+      - 'scripts/check_bilingual_content.py'
+      - 'scripts/check_notebook_code_contract.py'
+      - '.github/workflows/bilingual_content_check.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bilingual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install checker dependency
+        run: python -m pip install PyYAML==6.0.3
+      - name: Validate phased bilingual content
+        run: python scripts/check_bilingual_content.py --output check-output/bilingual-content.json
+      - name: Verify Notebook 00 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/notebook_code_contract.json
+          --output check-output/notebook-00-code-contract.json
+      - name: Verify Day 1 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day1_notebook_code_contract.json
+          --output check-output/notebook-01-code-contract.json
+      - name: Verify Day 2 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day2_notebook_code_contract.json
+          --output check-output/notebook-02-code-contract.json
+      - name: Verify Day 3 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day3_notebook_code_contract.json
+          --output check-output/notebook-03-code-contract.json
+      - name: Verify Day 4 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day4_notebook_code_contract.json
+          --output check-output/notebook-04-code-contract.json
+      - name: Verify Day 5 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day5_notebook_code_contract.json
+          --output check-output/notebook-05-code-contract.json
+      - name: Verify Notebook 99 executable cells
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/notebook99_code_contract.json
+          --output check-output/notebook-99-code-contract.json
+      - name: Upload bilingual quality reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bilingual-quality-reports
+          path: check-output
+          retention-days: 14

@@ -1,0 +1,64 @@
+name: Build Bilingual Day 1 Notebook
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop/bilingual-v1.1.0
+    paths:
+      - 'scripts/capture_notebook_code_contract.py'
+      - 'scripts/build_bilingual_day1.py'
+      - '.github/workflows/build_bilingual_day1.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Capture released executable-cell contract
+        run: >-
+          python scripts/capture_notebook_code_contract.py
+          --notebook notebooks/01_baseline_boosting.ipynb
+          --output content/day1_notebook_code_contract.json
+          --source-release v1.0.0
+          --purpose "Ensure the bilingual conversion preserves the released Day 1 executable logic."
+      - name: Generate paired bilingual markdown
+        run: >-
+          python scripts/build_bilingual_day1.py
+          --output-report check-output/day1-bilingual-build.json
+      - name: Verify executable cells were preserved
+        run: >-
+          python scripts/check_notebook_code_contract.py
+          --contract content/day1_notebook_code_contract.json
+          --output check-output/day1-code-contract.json
+      - name: Commit generated contract and notebook
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/day1_notebook_code_contract.json notebooks/01_baseline_boosting.ipynb
+          if git diff --cached --quiet; then
+            echo 'Generated Day 1 notebook is already current.'
+          else
+            git commit -m 'Generate bilingual Day 1 notebook'
+            git push
+          fi
+      - name: Upload Day 1 build evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bilingual-day1-build
+          path: check-output
+          retention-days: 14

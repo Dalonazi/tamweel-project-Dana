@@ -1,0 +1,28 @@
+name: Learning Resource Links
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  links:
+    if: ${{ !github.event.repository.private && github.repository == 'almiyead-rgb/sda-dsc-211-student-template' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Check public learning links (not a project grade)
+        run: python scripts/check_external_links.py
+      - name: Save link report for review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: learning-resource-links
+          path: .check-output/external-links.json
+          retention-days: 7

@@ -1,0 +1,176 @@
+videos:
+- id: github
+  title_ar: إنشاء مستودع وفهم ملفات مشروعك
+  title_en: 'How to create your first GitHub repository: A beginner''s guide | Tutorial'
+  url: https://www.youtube.com/watch?v=-RZ03WHqkaY
+  channel: GitHub
+  language: en
+  duration: '9:31'
+  duration_seconds: 571
+  level: beginner
+  topic: GitHub repositories
+  why_this_video: تعرف على المستودع والملفات قبل إنشاء نسختك من قالب الدورة.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://github.blog/developer-skills/github/beginners-guide-to-github-repositories-how-to-create-your-first-repo/
+  why_this_video_en: Understand repositories and files before creating your own project from the course template.
+- id: colab
+  title_ar: البداية مع Google Colab
+  title_en: Get started with Google Colaboratory (Coding TensorFlow)
+  url: https://www.youtube.com/watch?v=inN8seMm7UI
+  channel: TensorFlow
+  language: en
+  duration: '3:10'
+  duration_seconds: 190
+  level: beginner
+  topic: Colab basics
+  why_this_video: تعرف على الخلايا وتشغيل Python في المتصفح. واجهة الفيديو قديمة؛ اتبع دليل الدورة للخطوات الحالية.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://www.youtube.com/watch?v=inN8seMm7UI
+  why_this_video_en: Learn cells and browser-based Python. This older video introduces concepts; follow the course
+    guide for current steps.
+- id: actions
+  title_ar: فهم GitHub Actions
+  title_en: How to use GitHub Actions | GitHub for Beginners
+  url: https://www.youtube.com/watch?v=BQrohJ3PT7I
+  channel: GitHub
+  language: en
+  duration: '8:04'
+  duration_seconds: 484
+  level: beginner
+  topic: GitHub Actions
+  why_this_video: افهم مكان التشغيل وقراءة النتيجة؛ استخدم workflows الموجودة في قالب الدورة.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://github.blog/developer-skills/github/github-for-beginners-getting-started-with-github-actions/
+  why_this_video_en: Locate runs and read their results. Use the workflows already included in your course template.
+- id: boosting
+  title_ar: فكرة Gradient Boosting
+  title_en: 'Gradient Boost Part 1 (of 4): Regression Main Ideas'
+  url: https://www.youtube.com/watch?v=3CC4N4z3GJc
+  channel: StatQuest with Josh Starmer
+  language: en
+  duration: '15:52'
+  duration_seconds: 952
+  level: intermediate
+  topic: Gradient boosting
+  why_this_video: ابدأ بفكرة تصحيح الأخطاء المتتابع في مثال انحدار، ثم اربطها بتصنيف اليوم الأول.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://statquest.org/video_index.html
+  why_this_video_en: Build intuition from a regression example, then connect it to classification in day 1.
+- id: xgboost
+  title_ar: XGBoost للتصنيف
+  title_en: 'XGBoost Part 2 (of 4): Classification'
+  url: https://www.youtube.com/watch?v=8b1JEDvenQU
+  channel: StatQuest with Josh Starmer
+  language: en
+  duration: '25:17'
+  duration_seconds: 1517
+  level: intermediate
+  topic: XGBoost classification
+  why_this_video: راجع كيف تتحول الأشجار إلى احتمال في التصنيف؛ مثال تعليمي وليس حل مشروعك.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://statquest.org/video_index.html
+  why_this_video_en: Review how boosted trees produce classification probabilities; this is not a solution to your
+    project.
+- id: validation
+  title_ar: فهم التحقق المتقاطع
+  title_en: 'Machine Learning Fundamentals: Cross Validation'
+  url: https://www.youtube.com/watch?v=fSytzGwwBVw
+  channel: StatQuest with Josh Starmer
+  language: en
+  duration: '6:04'
+  duration_seconds: 364
+  level: intermediate
+  topic: Cross-validation
+  why_this_video: راجع فكرة الطيات؛ أضف إليها قيود الزمن والعملاء ونضج الهدف في مختبر اليوم الثاني.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://statquest.org/video_index.html
+  why_this_video_en: Review folds, then add the time, customer and target-maturity constraints from day 2.
+- id: metrics
+  title_ar: ROC وعتبة القرار وPrecision–Recall
+  title_en: ROC and AUC, Clearly Explained!
+  url: https://www.youtube.com/watch?v=4jRBRDbJemM
+  channel: StatQuest with Josh Starmer
+  language: en
+  duration: '16:17'
+  duration_seconds: 977
+  level: intermediate
+  topic: Imbalance and classification metrics
+  why_this_video: قارن المقاييس وتأثير العتبة؛ ركز أيضًا على الجزء الأخير عن Precision–Recall.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://statquest.org/video_index.html
+  why_this_video_en: Compare metrics and thresholds, including the final section on precision–recall.
+- id: shap
+  title_ar: SHAP من صاحب الطريقة
+  title_en: 'The Science Behind InterpretML: SHAP'
+  url: https://www.youtube.com/watch?v=-taOhqkiuIo
+  channel: Microsoft Developer
+  language: en
+  duration: '11:46'
+  duration_seconds: 706
+  level: intermediate
+  topic: SHAP explanations
+  why_this_video: استمع إلى Scott Lundberg عن إسهام الخصائص. الشرح لا يثبت السببية، ولا يتطلب حساب Azure.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://learn.microsoft.com/en-us/shows/ai-show/the-science-behind-interpretml-shap
+  why_this_video_en: Hear SHAP creator Scott Lundberg explain feature contributions. Explanations do not establish
+    causality; no Azure account is required.
+- id: calibration
+  title_ar: المعايرة والقرار الحساس للتكلفة
+  title_en: 'KEYNOTE: Olivier Grisel - Handling predictive uncertainty in Machine Learning | PyData Paris 2024'
+  url: https://www.youtube.com/watch?v=-gYnfA0e5ic
+  channel: PyData
+  language: en
+  duration: '44:27'
+  duration_seconds: 2667
+  level: advanced
+  topic: Calibration and cost-sensitive decisions
+  why_this_video: محاضرة اختيارية تجمع جودة الاحتمال وقرار العتبة؛ طبّق سياسة الدورة التعليمية 10FN+FP وسقف12%.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://probabl-ai.github.io/calibration-cost-sensitive-learning/intro.html
+  why_this_video_en: An optional lecture connecting uncertainty, calibration and decisions. Apply the course’s educational
+    10FN+FP loss and 12% capacity.
+- id: stacking
+  title_ar: تجميع Stacking للأحداث النادرة
+  title_en: Using a Stacking Model Ensemble Approach to Predict Rare Events | SciPy 2019 | Susan Yuhou Xia
+  url: https://www.youtube.com/watch?v=6oD5K0x1k7c
+  channel: Enthought
+  language: en
+  duration: '26:05'
+  duration_seconds: 1565
+  level: advanced
+  topic: Stacking and rare events
+  why_this_video: راجع فكرة النموذج الجامع ثم ناقش ضرورة OOF والاختبار الصادق في مشروعك؛ لا تفترض أن التجميع سيفوز.
+  verified_on: '2026-10-02'
+  status: verified
+  verification_method: 'YouTube watch metadata: exact video ID, public video, playabilityStatus OK, title/channel/duration;
+    no media downloaded'
+  source_url: https://www.youtube.com/watch?v=6oD5K0x1k7c
+  why_this_video_en: Review stacking, then examine OOF predictions and honest validation in day 5. Ensembling is
+    not guaranteed to win.

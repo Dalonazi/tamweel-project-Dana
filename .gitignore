@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+.cache/
+.env
+*.download
+
+.check-output/
+submission/final_project_bundle.zip
+submission/self_check_report.json
+submission/self_check_report.md
